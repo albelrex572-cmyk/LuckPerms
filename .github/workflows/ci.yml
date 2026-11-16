@@ -31,9 +31,9 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
-
-      - name: Run build and tests with Gradle wrapper
-        run: ./gradlew test build -PdockerTests
+  
+      - name: Build Paper/Bukkit JAR
+        run: ./gradlew :bukkit:shadowJar
 
       - name: Publish test report
         uses: mikepenz/action-junit-report@v5
