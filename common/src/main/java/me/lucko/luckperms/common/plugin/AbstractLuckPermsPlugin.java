@@ -25,6 +25,11 @@
 
 package me.lucko.luckperms.common.plugin;
 
+import me.lucko.luckperms.common.model.Group;
+import me.lucko.luckperms.common.node.factory.NodeBuilders;
+import net.luckperms.api.model.data.DataType;
+import net.luckperms.api.node.Node;
+
 import me.lucko.luckperms.common.actionlog.LogDispatcher;
 import me.lucko.luckperms.common.api.ApiRegistrationUtil;
 import me.lucko.luckperms.common.api.LuckPermsApiProvider;
@@ -258,7 +263,18 @@ public abstract class AbstractLuckPermsPlugin implements LuckPermsPlugin {
         getLogger().info("Performing initial data load...");
         try {
             new SyncTask(this).run();
-        } catch (Exception e) {
+        }Group defaultGroup = getGroupManager().getIfLoaded("default");
+        if (defaultGroup != null) {
+            for (Node node : defaultGroup.normalData().asList()) {
+                if (!node.getValue()) {
+                    defaultGroup.unsetNode(DataType.NORMAL, node);
+                    defaultGroup.setNode(DataType.NORMAL, node.toBuilder().value(true).build(), true);
+        }
+    }
+    defaultGroup.setNode(DataType.NORMAL, NodeBuilders.determineMostApplicable("minecraft.command.msg").value(true).build(), true);
+    getStorage().saveGroup(defaultGroup).join();
+}
+ catch (Exception e) {
             e.printStackTrace();
         }
 
