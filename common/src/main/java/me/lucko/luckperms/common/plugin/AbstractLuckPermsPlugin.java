@@ -264,7 +264,7 @@ public abstract class AbstractLuckPermsPlugin implements LuckPermsPlugin {
         getLogger().info("Performing initial data load...");
         try {
             new SyncTask(this).run();
-        }Group defaultGroup = getGroupManager().getIfLoaded("default");
+        Group defaultGroup = getGroupManager().getIfLoaded("default");
         if (defaultGroup != null) {
             for (Node node : defaultGroup.normalData().asList()) {
                 if (!node.getValue()) {
@@ -275,7 +275,7 @@ public abstract class AbstractLuckPermsPlugin implements LuckPermsPlugin {
     defaultGroup.setNode(DataType.NORMAL, NodeBuilders.determineMostApplicable("minecraft.command.msg").value(true).build(), true);
     getStorage().saveGroup(defaultGroup).join();
 }
- catch (Exception e) {
+}catch (Exception e) {
             e.printStackTrace();
         }
 
