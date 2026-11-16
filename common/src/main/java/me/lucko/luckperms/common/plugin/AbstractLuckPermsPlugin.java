@@ -1,3 +1,4 @@
+
 /*
  * This file is part of LuckPerms, licensed under the MIT License.
  *
