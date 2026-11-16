@@ -32,13 +32,8 @@ subprojects {
     jar {
         from '../LICENSE.txt'
     }
-
-    def determinePatchVersion = {
-        def tagInfo = providers.exec {
-            commandLine 'git', 'describe', '--tags'
-        }.standardOutput.asText.get().trim()
-
-        return tagInfo.contains('-') ? tagInfo.split('-')[1] : 0
+        def determinePatchVersion = {
+        return 0
     }
 
     project.ext.majorVersion = '5'
