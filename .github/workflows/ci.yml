@@ -58,11 +58,11 @@ jobs:
             forge/loader/build/libs/LuckPerms-Forge-*.jar
             standalone/loader/build/libs/LuckPerms-Standalone-*.jar
 
-      - name: Upload standalone artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: standalone-binary
-          path: standalone/loader/build/libs/LuckPerms-Standalone-*.jar
+            - name: Upload Paper artifact
+              uses: actions/upload-artifact@v4
+              with:
+                 name: LuckPerms-Paper
+                  path: bukkit/build/libs/LuckPerms-Bukkit-*.jar
 
 
   build-docker:
